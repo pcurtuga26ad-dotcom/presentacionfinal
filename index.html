@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102a24">
+<title>ECOFLY S.L. | Presentación RETO 01</title>
+<style>
+:root{--green:#38b000;--blue:#00a8e8;--ink:#202d42;--deep:#102a24;--paper:#f6f8f4;--muted:#63736b;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b1715;color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif}
+.deck{width:100vw;height:100vh;position:relative;background:var(--paper)}
+.slide{position:absolute;inset:0;padding:5.5vh 7vw 7vh;display:none;overflow:hidden;background:var(--paper)}
+.slide.active{display:flex;animation:enter .45s ease both}
+@keyframes enter{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.slide.dark{background:linear-gradient(125deg,#102a24 0%,#183d32 60%,#102a24 100%);color:#fff}
+.slide.blue{background:linear-gradient(125deg,#102a24,#153c48);color:#fff}
+.slide:after{content:"";position:absolute;width:36vw;height:36vw;border:1px solid rgba(56,176,0,.13);border-radius:50%;right:-17vw;top:-18vw;pointer-events:none}
+.content{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;gap:2.2vh}
+.kicker{font-size:clamp(11px,1vw,16px);font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.7vh}
+.dark .kicker,.blue .kicker{color:#8ce36a}
+h1{font-size:clamp(44px,7.3vw,108px);line-height:.96;letter-spacing:-.055em;margin:0;font-weight:850;max-width:1000px}
+h2{font-size:clamp(30px,4.1vw,62px);line-height:1.02;letter-spacing:-.04em;margin:0 0 1.4vh;font-weight:820}
+h3{font-size:clamp(17px,1.65vw,25px);margin:0 0 .7em}
+p{font-size:clamp(15px,1.45vw,22px);line-height:1.48;margin:.15em 0;color:inherit}
+.lead{font-size:clamp(19px,2.05vw,31px);line-height:1.38;max-width:900px;color:inherit}
+.small{font-size:clamp(12px,1vw,15px);line-height:1.4;color:var(--muted)}
+.dark .small,.blue .small{color:#b9c9c1}
+.green{color:var(--green)}.blueText{color:var(--blue)}
+.hero{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.31}
+.heroShade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,30,24,.96) 0%,rgba(8,30,24,.72) 52%,rgba(8,30,24,.18) 100%)}
+.heroLogo{width:clamp(170px,22vw,310px);background:white;border-radius:18px;padding:10px;margin-bottom:3vh}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3vw;align-items:center}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5vw}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2vw}
+.card{background:#fff;border:1px solid #e5ece4;border-radius:18px;padding:1.6vw;box-shadow:0 10px 30px rgba(18,45,34,.055)}
+.dark .card,.blue .card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.13);box-shadow:none}
+.card p{font-size:clamp(13px,1.2vw,18px);color:var(--muted)}
+.dark .card p,.blue .card p{color:#d0ddd7}
+.number{font-size:clamp(32px,4vw,60px);font-weight:850;letter-spacing:-.05em;color:var(--green);line-height:1}
+.tag{display:inline-block;border-radius:99px;padding:8px 13px;background:#e8f6e3;color:#246b17;font-weight:750;font-size:clamp(11px,.95vw,14px);margin:3px}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(56,176,0,.35);padding:10px 14px;border-radius:99px;font-weight:700;font-size:clamp(12px,1.1vw,16px)}
+.photo{width:100%;height:100%;max-height:58vh;object-fit:cover;border-radius:22px;box-shadow:0 18px 50px rgba(10,35,26,.15)}
+.logo{width:clamp(125px,14vw,200px);max-height:100px;object-fit:contain;background:#fff;border-radius:12px;padding:8px}
+ul.clean{list-style:none;padding:0;margin:.4em 0;display:grid;gap:.7em}
+ul.clean li{font-size:clamp(14px,1.3vw,20px);line-height:1.35;padding-left:1.3em;position:relative}
+ul.clean li:before{content:"";position:absolute;left:0;top:.48em;width:8px;height:8px;border-radius:50%;background:var(--green)}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;margin-top:1vh}
+.phase{border-top:4px solid var(--green);padding:1.2vw;background:rgba(255,255,255,.07);border-radius:0 0 14px 14px}
+.phase strong{display:block;font-size:clamp(15px,1.4vw,21px);margin-bottom:.5em}
+.phase span{font-size:clamp(12px,1.05vw,16px);line-height:1.4;color:inherit}
+.metric{font-size:clamp(34px,5vw,72px);font-weight:850;letter-spacing:-.06em}
+.footer{position:absolute;bottom:2.4vh;left:7vw;right:7vw;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#87958d;z-index:5}
+.dark .footer,.blue .footer{color:#b6c8be}
+.controls{position:absolute;right:3vw;bottom:2vh;display:flex;gap:8px;z-index:20}
+button{border:1px solid rgba(255,255,255,.22);background:#18382e;color:white;border-radius:50%;width:42px;height:42px;font-size:19px;cursor:pointer}
+button:hover{background:var(--green);color:#102a24}
+.progress{position:absolute;bottom:0;left:0;height:4px;background:var(--green);width:0;z-index:25;transition:width .25s}
+.counter{position:absolute;right:7vw;bottom:3.2vh;color:#89958e;font-size:12px;z-index:6}
+.dark .counter,.blue .counter{color:#c4d2ca}
+.imageCaption{font-size:12px;color:var(--muted);margin-top:8px}
+.twoColText{display:grid;grid-template-columns:1fr 1fr;gap:2vw}
+.highlight{border-left:4px solid var(--green);padding-left:1.2em}
+@media(max-width:760px){
+ .slide{padding:5vh 6vw 9vh}.grid2,.grid3,.grid4,.twoColText{grid-template-columns:1fr;gap:1.5vh}
+ .photo{max-height:28vh}.content{gap:1.5vh}.card{padding:14px}
+ .timeline{gap:8px}.phase{padding:10px}.footer{left:6vw;right:6vw}
+ .hideMobile{display:none}
+}
+@media(max-height:620px){.slide{padding-top:4vh;padding-bottom:6vh}.content{gap:1vh}.photo{max-height:42vh}.card{padding:1vw}p{line-height:1.3}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+<section class="slide dark active">
+ <img class="hero" src="assets/hero.jpg" alt="Dron agrícola sobre un cultivo">
+ <div class="heroShade"></div>
+ <div class="content" style="max-width:900px">
+  <img class="heroLogo" src="assets/logo.jpg" alt="Logotipo ECOFLY">
+  <div class="kicker">RETO 01 · Proyecto empresarial</div>
+  <h1>ECO<span style="color:#70d34b">FLY</span><br><span style="font-size:.48em;letter-spacing:-.02em;font-weight:650">Tecnología sostenible al servicio de la agricultura</span></h1>
+  <p class="lead" style="margin-top:2vh">Innovación, precisión y compromiso ambiental para transformar el trabajo en el campo.</p>
+  <p class="small">Paul Curtu · Sofia Trangoni · Nayerly Chenche · Walter Cruz</p>
+ </div>
+ <div class="footer"><span>Presentación del proyecto</span><span>ECOFLY S.L.</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">01 · Quiénes somos</div><h2>Una empresa que une<br><span class="green">tecnología y agricultura</span></h2>
+  <div class="grid2">
+   <div><p class="lead">ECOFLY S.L. diseña, comercializa y gestiona drones agrícolas para impulsar una agricultura más eficiente y sostenible.</p>
+    <ul class="clean"><li>Soluciones tecnológicas para profesionales y empresas agrícolas.</li><li>Análisis de cultivos mediante cámaras y sensores.</li><li>Optimización del agua y de los productos agrícolas.</li></ul>
+   </div>
+   <img class="photo" src="assets/drone-campo.png" alt="Dron trabajando sobre un cultivo">
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Identidad y actividad</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">02 · Actividad empresarial</div><h2>Dos líneas de negocio,<br><span class="green">un mismo propósito</span></h2>
+  <div class="grid2">
+   <div class="card"><div class="number">01</div><h3>Diseño y comercialización</h3><p>Drones agrícolas propios, accesorios y servicios relacionados para empresas y profesionales del sector.</p></div>
+   <div class="card"><div class="number">02</div><h3>Servicios en explotaciones</h3><p>Inspección y análisis de cultivos. Los técnicos detectan zonas que necesitan agua, fertilizantes o tratamientos específicos.</p></div>
+  </div>
+  <p class="highlight">La aplicación localizada evita tratar zonas que no lo necesitan y permite aprovechar mejor los recursos.</p>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Qué hacemos</span></div>
+</section>
+
+<section class="slide dark">
+ <div class="content">
+  <div class="kicker">03 · Propósito</div><h2>Nuestra misión y visión</h2>
+  <div class="grid2">
+   <div><div class="pill">MISIÓN</div><p class="lead" style="margin-top:1em">Facilitar la transformación del sector agrícola mediante tecnología de drones de precisión, optimizando recursos y mejorando la eficiencia.</p></div>
+   <div><div class="pill">VISIÓN</div><p class="lead" style="margin-top:1em">Ser un referente en soluciones tecnológicas sostenibles y liderar la transición hacia una agricultura de precisión y residuo cero.</p></div>
+  </div>
+  <p class="small">Queremos contribuir a la sostenibilidad alimentaria y a la conservación de los ecosistemas.</p>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Por qué y hacia dónde</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">04 · Valores corporativos</div><h2>Lo que guía cada decisión</h2>
+  <div class="grid3">
+   <div class="card"><h3>Innovación aplicada</h3><p>Tecnología para resolver necesidades reales del campo.</p></div>
+   <div class="card"><h3>Sostenibilidad</h3><p>Uso responsable del agua, menos insumos y economía circular.</p></div>
+   <div class="card"><h3>Eficiencia y precisión</h3><p>Aplicar recursos únicamente donde se necesitan.</p></div>
+   <div class="card"><h3>Calidad y fiabilidad</h3><p>Mantenimiento riguroso y gestión fiable de los datos.</p></div>
+   <div class="card"><h3>Compromiso agrícola</h3><p>Cercanía y acompañamiento a los agricultores.</p></div>
+   <div class="card" style="background:#eaf6e5"><h3 class="green">Nuestro lema</h3><p style="color:#284d27;font-weight:700">Tecnología sostenible al servicio de la agricultura.</p></div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Valores</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">05 · Identidad visual</div><h2>Una marca que representa<br><span class="green">naturaleza y tecnología</span></h2>
+  <div class="grid2">
+   <div><img class="logo" src="assets/logo.jpg" alt="Logotipo ECOFLY"><p class="lead" style="margin-top:1em">El logotipo combina un dron, una hoja y una gota de agua.</p>
+    <ul class="clean"><li>Verde: naturaleza.</li><li>Azul: uso responsable del agua.</li><li>Gris: profesionalidad y tecnología.</li><li>Blanco: limpieza y equilibrio.</li></ul>
+   </div>
+   <img class="photo" style="object-fit:contain;background:white;padding:12px" src="assets/paleta.jpg" alt="Paleta de colores corporativa">
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Imagen corporativa</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">06 · Organización</div><h2>Una estructura para trabajar<br><span class="green">de forma coordinada</span></h2>
+  <div class="grid2">
+   <div><p class="lead">ECOFLY cuenta con 100 trabajadores distribuidos en 8 departamentos.</p>
+    <ul class="clean"><li>Dirección General coordina y toma decisiones.</li><li>Cada departamento tiene funciones y responsabilidades específicas.</li><li>La base de datos organiza personal, proveedores, clientes y productos.</li></ul>
+   </div>
+   <img class="photo" style="object-fit:contain;background:white;padding:10px" src="assets/organigrama.jpg" alt="Organigrama de ECOFLY">
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Organigrama y gestión</span></div>
+</section>
+
+<section class="slide dark">
+ <div class="content">
+  <div class="kicker">07 · Protocolo empresarial</div><h2>Un entorno profesional,<br><span style="color:#8ce36a">seguro y respetuoso</span></h2>
+  <div class="grid3">
+   <div class="card"><h3>Respeto e igualdad</h3><p>Trato correcto, inclusión y ausencia de discriminación.</p></div>
+   <div class="card"><h3>Responsabilidad</h3><p>Puntualidad, cumplimiento de tareas y trabajo en equipo.</p></div>
+   <div class="card"><h3>Confidencialidad</h3><p>Protección de datos, imágenes y ubicaciones de explotaciones.</p></div>
+   <div class="card"><h3>Comunicación</h3><p>Lenguaje claro, educado y profesional.</p></div>
+   <div class="card"><h3>Cuidado de recursos</h3><p>Reparación, mantenimiento y reciclaje de equipos.</p></div>
+   <div class="card"><h3>Seguridad</h3><p>Formación, prevención y uso correcto de los EPI.</p></div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Manual de comportamiento</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">08 · Personas y prevención</div><h2>La seguridad empieza<br><span class="green">con una buena acogida</span></h2>
+  <div class="grid2">
+   <img class="photo" src="assets/formacion.png" alt="Formación y bienvenida de personal ECOFLY">
+   <div><h3>Incorporación</h3><ul class="clean"><li>Bienvenida y presentación de la empresa.</li><li>Conocimiento de instalaciones, equipo y responsables.</li><li>Formación sobre drones, baterías y prevención de riesgos.</li><li>Asignación de una persona de referencia.</li></ul>
+   <h3 style="margin-top:1em">En el trabajo</h3><p>Vestimenta adecuada al puesto y equipos de protección individual cuando la actividad lo requiera.</p></div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Acogida y seguridad</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">09 · Comunicación</div><h2>Comunicación clara,<br><span class="green">relaciones de confianza</span></h2>
+  <div class="grid3">
+   <div class="card"><div class="number">01</div><h3>Atención al cliente</h3><p>Escuchar necesidades y ofrecer soluciones adaptadas.</p></div>
+   <div class="card"><div class="number">02</div><h3>Transparencia</h3><p>Informar de precios, plazos, limitaciones y condiciones.</p></div>
+   <div class="card"><div class="number">03</div><h3>Seguimiento</h3><p>Gestionar incidencias y comprobar la satisfacción posventa.</p></div>
+  </div>
+  <div class="twoColText">
+   <div><h3>Comunicación externa</h3><p>Reuniones, llamadas, presupuestos, informes, correo corporativo, web y redes sociales.</p></div>
+   <div><h3>Comunicación interna</h3><p>Reuniones, informes, videollamadas y herramientas digitales para coordinar departamentos.</p></div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Atención y comunicación</span></div>
+</section>
+
+<section class="slide blue">
+ <div class="content">
+  <div class="kicker">10 · Responsabilidad social corporativa</div><h2>Crecer cuidando<br><span style="color:#8ce36a">a las personas y al planeta</span></h2>
+  <div class="grid2">
+   <div><h3>Dimensión interna</h3><ul class="clean"><li>Bienestar y seguridad laboral.</li><li>Igualdad y no discriminación.</li><li>Formación y desarrollo profesional.</li><li>Conciliación y buen clima laboral.</li><li>Menos papel, energía y residuos.</li></ul></div>
+   <div><h3>Dimensión externa</h3><ul class="clean"><li>Reducir el desperdicio de agua e insumos agrícolas.</li><li>Reparar equipos y reciclar componentes.</li><li>Asesorar con transparencia y proteger los datos.</li><li>Colaborar con cooperativas y entidades locales.</li><li>Cumplir la normativa y operar con seguridad.</li></ul></div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Compromiso social y ambiental</span></div>
+</section>
+
+<section class="slide dark">
+ <div class="content">
+  <div class="kicker">11 · Eventos empresariales</div><h2>Dos eventos,<br><span style="color:#8ce36a">dos objetivos complementarios</span></h2>
+  <div class="grid2">
+   <div class="card"><div class="pill">EVENTO INTERNO</div><h3 style="margin-top:1em">AgroTech Conecta</h3><p>Jornada de cohesión y team building para el equipo de Operaciones y Drones.</p><p><strong>Objetivo:</strong> motivación, clima laboral, valores y relaciones personales.</p></div>
+   <div class="card"><div class="pill">EVENTO EXTERNO</div><h3 style="margin-top:1em">Vuelo Cero Emisiones</h3><p>Gala de presentación y demostración en campo para clientes, agricultores, instituciones y medios.</p><p><strong>Objetivo:</strong> dar a conocer la empresa, posicionar la marca y captar contactos.</p></div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Organización de eventos</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">12 · Evento interno</div><h2>AgroTech Conecta</h2>
+  <div class="grid2">
+   <div><p class="lead">Una jornada para reforzar la unión del equipo y convertir los valores de ECOFLY en experiencias compartidas.</p>
+    <ul class="clean"><li>Ubicación prevista: Finca La Encinilla.</li><li>Coach externo especializado en team building.</li><li>Dinámicas colaborativas y actividades al aire libre.</li><li>Desayuno y almuerzo con productos de proximidad.</li><li>Kit de bienvenida reutilizable y residuo cero.</li></ul>
+   </div>
+   <img class="photo" src="assets/formacion-drones.png" alt="Equipo ECOFLY en una actividad de formación">
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Evento interno</span></div>
+</section>
+
+<section class="slide dark">
+ <div class="content">
+  <div class="kicker">13 · Planificación interna</div><h2>AgroTech Conecta<br><span style="color:#8ce36a">en tres fases</span></h2>
+  <div class="timeline">
+   <div class="phase"><strong>4 semanas antes</strong><span>Reserva de la finca, contratación del coach y catering, convocatoria interna.</span></div>
+   <div class="phase"><strong>Semana del evento</strong><span>Revisión de materiales, alergias alimentarias y montaje de las aulas.</span></div>
+   <div class="phase"><strong>48 horas después</strong><span>Encuesta de satisfacción y publicación de la galería en la intranet.</span></div>
+  </div>
+  <div class="grid2" style="margin-top:2vh">
+   <div><div class="small">PRESUPUESTO TOTAL</div><div class="metric">4.095 €</div></div>
+   <div class="small">Espacio 800 € · Coach 1.200 € · Catering 1.050 € · Kits 450 € · Transporte 400 € · Imprevistos 195 €</div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Planificación y presupuesto interno</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">14 · Evento externo</div><h2>Vuelo Cero Emisiones</h2>
+  <div class="grid2">
+   <div><p class="lead">Presentación oficial de ECOFLY y demostración de las capacidades de sus drones agrícolas.</p>
+    <ul class="clean"><li>Auditorio y campo anexo de ensayos.</li><li>3 drones de precisión con estaciones de carga solar.</li><li>Demostración de vuelo retransmitida en directo.</li><li>Cóctel para 150 asistentes con gastronomía regional.</li><li>Atención a autoridades, clientes, cooperativas y prensa.</li></ul>
+   </div>
+   <img class="photo" src="assets/drone-campo.png" alt="Demostración de dron agrícola en un cultivo">
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Evento externo</span></div>
+</section>
+
+<section class="slide dark">
+ <div class="content">
+  <div class="kicker">15 · Planificación externa</div><h2>Una presentación<br><span style="color:#8ce36a">cuidada al detalle</span></h2>
+  <div class="timeline">
+   <div class="phase"><strong>8 semanas antes</strong><span>Reserva de instalaciones, permisos de vuelo y envío de invitaciones institucionales.</span></div>
+   <div class="phase"><strong>Semana del evento</strong><span>Ensayos generales, prueba de vuelo, montaje técnico y confirmaciones.</span></div>
+   <div class="phase"><strong>24–72 horas después</strong><span>Notas de prensa, difusión de imágenes, dossier de impacto y agradecimientos.</span></div>
+  </div>
+  <div class="grid2" style="margin-top:2vh">
+   <div><div class="small">PRESUPUESTO TOTAL</div><div class="metric">15.540 €</div></div>
+   <div class="small">Espacio 2.500 € · Audiovisual y streaming 3.200 € · Catering 5.250 € · Protocolo 1.800 € · Permisos y seguros 950 € · Branding 1.100 € · Imprevistos 740 €</div>
+  </div>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Planificación y presupuesto externo</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">16 · Protocolo del evento externo</div><h2>Organización, precedencias<br>y seguridad</h2>
+  <div class="grid2">
+   <div><h3>Recepción y protocolo</h3><ul class="clean"><li>Dos mesas de acreditación: autoridades y resto de invitados.</li><li>Orden de precedencias para autoridades oficiales.</li><li>Intervenciones breves y ordenadas.</li><li>Vestimenta formal para autoridades y ponentes.</li></ul></div>
+   <div><h3>Demostración en campo</h3><ul class="clean"><li>Perímetro de seguridad de 30 metros.</li><li>Tribuna cubierta para autoridades.</li><li>Cascos y gafas de protección cuando proceda.</li><li>Pilotos certificados y equipo de seguridad.</li></ul></div>
+  </div>
+  <p class="small">La planificación contempla permisos de vuelo, seguros, control de accesos y soporte sanitario.</p>
+ </div><div class="footer"><span>ECOFLY S.L.</span><span>Protocolo y seguridad</span></div>
+</section>
+
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">18 · Sostenibilidad, ODS y criterios ASG</div>
+  <h2>Una agricultura más <span style="color:#38b000">eficiente y responsable</span></h2>
+  <p class="lead">ECOFLY integra las dimensiones ambiental, social y económica en su actividad y en sus eventos.</p>
+  <div class="grid2">
+   <div class="card">
+    <h3>ODS prioritarios</h3>
+    <div class="tag">ODS 6 · Agua</div><div class="tag">ODS 9 · Innovación</div>
+    <div class="tag">ODS 12 · Consumo responsable</div><div class="tag">ODS 15 · Ecosistemas</div>
+    <p>También contribuye a los ODS 7, 8, 11 y 13: energía, trabajo digno, comunidades sostenibles y acción climática.</p>
+   </div>
+   <div class="card">
+    <h3>Criterios ASG</h3>
+    <ul class="clean">
+     <li><b>Ambiental:</b> ahorro de agua y energía, reparación de equipos y gestión de residuos.</li>
+     <li><b>Social:</b> igualdad, formación, seguridad y condiciones laborales dignas.</li>
+     <li><b>Gobernanza:</b> transparencia, cumplimiento normativo y protección de datos.</li>
+    </ul>
+   </div>
+  </div>
+  <p class="small highlight">Retos del sector: uso ineficiente del agua, tratamientos agrícolas innecesarios, emisiones, residuos electrónicos y desigualdad en el acceso a la tecnología. Los drones y sensores ayudan a actuar con mayor precisión, siempre que se utilicen adecuadamente.</p>
+ </div>
+ <div class="footer"><span>ECOFLY S.L.</span><span>Agenda 2030 y compromiso ASG</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">19 · Economía circular</div>
+  <h2>Alargar la vida útil y <span style="color:#38b000">aprovechar los recursos</span></h2>
+  <p class="lead">ECOFLY aplica las cinco acciones de la economía circular en sus eventos y en sus productos.</p>
+  <div class="grid3">
+   <div class="card"><div class="number">01</div><h3>Reducir</h3><p>Invitaciones digitales, menos materiales de un solo uso, control del consumo y del desperdicio alimentario.</p></div>
+   <div class="card"><div class="number">02</div><h3>Reutilizar</h3><p>Paneles, estructuras modulares, decoración y materiales que puedan emplearse en futuros eventos.</p></div>
+   <div class="card"><div class="number">03</div><h3>Reparar</h3><p>Mantenimiento de drones, baterías y equipos tecnológicos para evitar sustituciones prematuras.</p></div>
+   <div class="card"><div class="number">04</div><h3>Reciclar</h3><p>Papel reciclado, madera recuperada, materiales reciclables y separación de residuos.</p></div>
+   <div class="card"><div class="number">05</div><h3>Recuperar</h3><p>Entrega de residuos y componentes electrónicos a los sistemas y gestores autorizados.</p></div>
+   <div class="card"><h3>En nuestros productos</h3><p>Drones reparables, sustitución de piezas y baterías, embalajes reciclables y servicios de revisión y mantenimiento.</p></div>
+  </div>
+ </div>
+ <div class="footer"><span>ECOFLY S.L.</span><span>Reducir · Reutilizar · Reparar · Reciclar · Recuperar</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">20 · Proveedores y presupuesto sostenible</div>
+  <h2>Elegir con responsabilidad, <span style="color:#38b000">no solo por precio</span></h2>
+  <div class="grid2">
+   <div class="card">
+    <h3>Qué valoramos en los proveedores</h3>
+    <ul class="clean">
+     <li>Proximidad y apoyo a la economía local.</li>
+     <li>Materiales reciclados, reutilizables y menos envases.</li>
+     <li>Condiciones laborales dignas, igualdad y prevención.</li>
+     <li>Calidad, transparencia y cumplimiento normativo.</li>
+    </ul>
+    <p class="small">Ejemplos propuestos: Ecofood Catering Km0, Minibuses Verdes S.L., GreenAV Events y EcoPrint Soluciones.</p>
+   </div>
+   <div class="card">
+    <h3>Evaluación ASG de 0 a 2 puntos</h3>
+    <p><b>Ambiental (40%)</b> · <b>Social (30%)</b> · <b>Gobernanza (30%)</b></p>
+    <p class="highlight">Puntuación final = (A × 0,40) + (S × 0,30) + (G × 0,30)</p>
+    <p>0: no cumple · 1: cumple parcialmente · 2: cumple y lo acredita. Si faltan datos, queda «no evaluable» hasta solicitar información.</p>
+   </div>
+  </div>
+  <div class="grid3">
+   <div class="card"><h3>AgroTech Conecta</h3><div class="metric">4.095 €</div><p>Evento interno</p></div>
+   <div class="card"><h3>Vuelo Cero Emisiones</h3><div class="metric">15.540 €</div><p>Evento externo</p></div>
+   <div class="card"><h3>Total de ambos</h3><div class="metric">19.635 €</div><p>Presupuesto conjunto</p></div>
+  </div>
+  <p class="small">La valoración ASG complementa la revisión de calidad, requisitos técnicos, seguridad y precio de cada oferta.</p>
+ </div>
+ <div class="footer"><span>ECOFLY S.L.</span><span>Contratación responsable y control económico</span></div>
+</section>
+
+<section class="slide">
+ <div class="content">
+  <div class="kicker">21 · Medidas y seguimiento de los eventos</div>
+  <h2>Compromisos que se pueden <span style="color:#38b000">comprobar</span></h2>
+  <div class="grid2">
+   <div class="card">
+    <h3>AgroTech Conecta · Evento interno</h3>
+    <ul class="clean">
+     <li>Invitaciones digitales, materiales reutilizables y residuos separados.</li>
+     <li>Catering local y de temporada; transporte colectivo.</li>
+     <li>Actividades inclusivas, igualdad y atención a alergias.</li>
+     <li>Presupuesto transparente y encuesta de satisfacción.</li>
+    </ul>
+   </div>
+   <div class="card">
+    <h3>Vuelo Cero Emisiones · Evento externo</h3>
+    <ul class="clean">
+     <li>Acreditaciones digitales, LED y materiales reciclables.</li>
+     <li>Transporte compartido y carga solar para drones cuando sea posible.</li>
+     <li>Instalaciones accesibles, personal cualificado y zonas de seguridad.</li>
+     <li>Permisos de vuelo, seguros y gestión responsable de datos e imágenes.</li>
+    </ul>
+   </div>
+  </div>
+  <div class="card">
+   <h3>¿Cómo mediremos los resultados?</h3>
+   <div class="grid4">
+    <div><b>Papel</b><p class="small">Porcentaje de invitaciones digitales.</p></div>
+    <div><b>Residuos</b><p class="small">Cantidad separada correctamente y materiales reutilizados.</p></div>
+    <div><b>Movilidad y catering</b><p class="small">Uso de transporte colectivo y porcentaje de producto local.</p></div>
+    <div><b>Personas y gestión</b><p class="small">Satisfacción, proveedores evaluados e incidencias de seguridad.</p></div>
+   </div>
+  </div>
+  <p class="small highlight">Después de cada evento, ECOFLY revisará los indicadores para identificar mejoras y aplicarlas en futuras actividades.</p>
+ </div>
+ <div class="footer"><span>ECOFLY S.L.</span><span>Evaluación y mejora continua</span></div>
+</section>
+<section class="slide blue">
+ <div class="content">
+  <div class="kicker">22 · Conclusión</div><h2>La innovación tiene sentido<br><span style="color:#8ce36a">cuando mejora el futuro</span></h2>
+  <p class="lead">ECOFLY demuestra que la tecnología puede ayudar a producir mejor, utilizar menos recursos y cuidar el entorno.</p>
+  <div class="grid3">
+   <div class="card"><div class="number">01</div><h3>Precisión</h3><p>Actuar donde realmente hace falta.</p></div>
+   <div class="card"><div class="number">02</div><h3>Personas</h3><p>Crear equipos seguros, motivados y coordinados.</p></div>
+   <div class="card"><div class="number">03</div><h3>Sostenibilidad</h3><p>Reducir residuos y alargar la vida de los equipos.</p></div>
+  </div>
+  <h2 style="margin-top:1.5vh;color:#8ce36a">Muchas gracias</h2>
+  <p class="small">ECOFLY S.L. · Tecnología sostenible al servicio de la agricultura</p>
+ </div><div class="footer"><span>Paul Curtu · Sofia Trangoni · Nayerly Chenche · Walter Cruz</span><span>Fin de la presentación</span></div>
+</section>
+
+<div class="counter" id="counter">01 / 22</div>
+<div class="controls">
+ <button id="prev" aria-label="Diapositiva anterior" title="Anterior (←)">‹</button>
+ <button id="next" aria-label="Diapositiva siguiente" title="Siguiente (→)">›</button>
+ <button id="full" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
+</div>
+<div class="progress" id="progress"></div>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0;
+function show(n){
+ current=Math.max(0,Math.min(slides.length-1,n));
+ slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+ document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+}
+function next(){show(current+1)} function prev(){show(current-1)}
+document.getElementById('next').addEventListener('click',next);
+document.getElementById('prev').addEventListener('click',prev);
+document.getElementById('full').addEventListener('click',()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()});
+document.addEventListener('keydown',e=>{
+ if(['ArrowRight',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();next()}
+ if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev()}
+ if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}
+ if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);
+});
+let touchX=null;
+document.addEventListener('touchstart',e=>touchX=e.changedTouches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{if(touchX===null)return;let dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>55){dx<0?next():prev()}touchX=null},{passive:true});
+show(0);
+</script>
+</body></html>
